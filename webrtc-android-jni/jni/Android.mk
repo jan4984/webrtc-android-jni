@@ -1,7 +1,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-common_CFLAGS := -fexceptions -DWEBRTC_POSIX=1 -Isrc/
+common_CFLAGS := -fexceptions -DWEBRTC_POSIX=1 -Ijni/src/
 common_LDFLAGS :=
 
 common_SRC_FILES := \
@@ -83,6 +83,7 @@ endif
 common_C_INCLUDES = $(LOCAL_PATH)/include
 
 include $(CLEAR_VARS)
+LOCAL_CFLAGS += -pie -fPIE
 LOCAL_MODULE:= libwebrtc
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_SRC_FILES := $(common_SRC_FILES)
@@ -91,4 +92,20 @@ LOCAL_LDFLAGS += $(common_LDFLAGS)
 LOCAL_C_INCLUDES += $(common_C_INCLUDES)
 
 include $(BUILD_SHARED_LIBRARY)
+#########################################
+#include $(CLEAR_VARS)    
+#LOCAL_MODULE := webrtc
+#LOCAL_SRC_FILES := ../libs/armeabi/libwebrtc.so
+#include $(PREBUILT_SHARED_LIBRARY)  
+
+include $(CLEAR_VARS)
+LOCAL_CFLAGS += -pie -fPIE
+LOCAL_LDFLAGS += -pie -fPIE
+#LOCAL_PATH := $(call my-dir)
+common_CFLAGS := -DWEBRTC_POSIX=1 -Ijni/src/
+LOCAL_SHARED_LIBRARIES := libwebrtc
+LOCAL_SRC_FILES := webrtc_audio_test.c
+LOCAL_MODULE := webrtc_test
+LOCAL_CFLAGS += $(common_CFLAGS)
+include $(BUILD_EXECUTABLE)
 

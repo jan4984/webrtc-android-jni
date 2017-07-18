@@ -1553,10 +1553,14 @@ void WebRtcNsx_ProcessCore(NoiseSuppressionFixedC* inst,
     assert(false);
   }
 #endif
+    printf("%s\n", "----------out assert------");
 
   // Check that initialization has been done
   assert(inst->initFlag == 1);
+      printf("%s\n", "----------out assert--A----");
+
   assert((num_bands - 1) <= NUM_HIGH_BANDS_MAX);
+    printf("%s\n", "----------out assert---B---");
 
   const short* const* speechFrameHB = NULL;
   short* const* outFrameHB = NULL;
@@ -1566,9 +1570,13 @@ void WebRtcNsx_ProcessCore(NoiseSuppressionFixedC* inst,
     outFrameHB = &outFrame[1];
     num_high_bands = (size_t)(num_bands - 1);
   }
+      printf("%s\n", "----------out assert---C---");
 
   // Store speechFrame and transform to frequency domain
+  //add
+  printf("%p, %s\n", speechFrame, "------");
   WebRtcNsx_DataAnalysis(inst, (short*)speechFrame[0], magnU16);
+    printf("%s\n", "----------in assert 1------");
 
   if (inst->zeroInputSignal) {
     WebRtcNsx_DataSynthesis(inst, outFrame[0]);
@@ -1589,6 +1597,7 @@ void WebRtcNsx_ProcessCore(NoiseSuppressionFixedC* inst,
     }  // end of H band gain computation
     return;
   }
+    printf("%s\n", "----------in assert 2------");
 
   // Update block index when we have something to process
   inst->blockIndex++;
