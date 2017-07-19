@@ -188,6 +188,10 @@
 //     webrtc_Init();
 
 // }
+#include <jni.h> 
+#include <Android/log.h>
+#define  TAG    "jni log"
+#define LOGI(...) __android_log_print(ANDROID_LOG_DEBUG, TAG, __VA_ARGS__)
 
 
 
@@ -204,6 +208,7 @@ float* pfmincin = NULL;
 float* pout = NULL;
 float* pOutData[1] = { NULL };
 
+//#define Debug
 
 
 void webrtc_Init()
@@ -257,9 +262,17 @@ void webrtc_Destory()
     free(pfspeaker);
     free(pfmincin);
     free(pout);
-    free(pOutData);
+    free(pOutData[0]);
  }
 
+
+//#define Debug_
+
+#ifdef Debug_
+FILE *fp_raw;
+FILE *fp_aec;
+
+#endif
 //note:
 //seample_rate: 8k  16k or 24k
 //delays
@@ -269,14 +282,19 @@ void webrtc_SetCconfig(int seample_rate, int delays)
     SAMPLE_RATE = seample_rate;
     WEBRTC_DELAYS = delays;
     NN = seample_rate/100;
+
+    #ifdef Debug_
+    fp_raw = fopen("/sdcard/raw.pcm", "wb");
+    fp_aec = fopen("/sdcard/out_aec1.pcm", "wb");
+    #endif
 }
 
 
-FILE *fp_aec;
+
 
 int webrtc_Aec_ns(char* speaker_buffer, int speaker_len,char*micin_buffer, int micin_len,char* out_buffer)
 {
-    if (!speaker_buffer || !micin_buffer || speaker_len != NN || micin_len != NN)
+    if ((!speaker_buffer) || (!micin_buffer)|| (!out_buffer) || (speaker_len != NN*2) || (micin_len != NN*2))
     {
         perror("invalid arguments");
         return -1;
@@ -288,6 +306,12 @@ int webrtc_Aec_ns(char* speaker_buffer, int speaker_len,char*micin_buffer, int m
     memset(pfspeaker, 0, NN);
     memset(pfmincin, 0, NN);
 
+    #ifdef Debug_
+
+    fwrite(speaker_buffer, 1, speaker_len, fp_raw);
+
+    #endif
+
     if(!pfspeaker)
         printf("pfspeaker is NULL\n");
     int i;
@@ -295,6 +319,8 @@ int webrtc_Aec_ns(char* speaker_buffer, int speaker_len,char*micin_buffer, int m
     {
         pfspeaker[i] = ((short*)speaker_buffer)[i];
     }
+    LOGI(TAG, "fuck   1");
+
 
     //float* pfmincin = malloc(sizeof(float)* NN);
     for(i = 0; i < NN; i++)
@@ -308,13 +334,14 @@ int webrtc_Aec_ns(char* speaker_buffer, int speaker_len,char*micin_buffer, int m
     //存放消回音结果
     //float* pout = (float*)malloc(NN);
     float* const*  ptr_out = &pout;
+    LOGI(TAG, "fuck   2");
 
     WebRtcAec_BufferFarend(aecmInst, pspeaker_buffer, NN);//对参考声音(回声)的处理
     printf("%d, %d\n", NN, WEBRTC_DELAYS);
     WebRtcAec_Process(aecmInst, ptr_near, 1, ptr_out, NN, WEBRTC_DELAYS, 0);//回声消除
 //#define Debug
 //ns
-#ifdef Debug
+#ifdef Debug_
     short* aec_out = malloc(sizeof(short) * NN);
     for(i =0; i < NN; i++)
     {
@@ -334,10 +361,12 @@ int webrtc_Aec_ns(char* speaker_buffer, int speaker_len,char*micin_buffer, int m
         ((short*)out_buffer)[i] = pOutData[0][i];
     }
     return 0;
+    LOGI(TAG, "fuck   3");
+
 }
 
 
-
+#if Debug
 int main()
 {
     webrtc_SetCconfig(16000, 200);
@@ -382,4 +411,5 @@ int main()
     free(out_buffer);
     webrtc_Destory();
 }
+#endif
 

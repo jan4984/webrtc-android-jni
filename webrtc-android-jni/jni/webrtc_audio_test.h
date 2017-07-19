@@ -18,15 +18,6 @@
 #include "webrtc/modules/audio_processing/ns/nsx_defines.h"
 #include "webrtc/modules/audio_processing/ns/include/noise_suppression.h"
 
-//
-//void webrtc_Init();
-//void webrtc_Destory();
-//note:
-//seample_rate:
-//delays
-//void webrt_SetCconfig(int seample_rate, int delays);
-
-//void webrtc_Aec_ns();
 void webrtc_Init();
 void webrtc_Destory();
 void webrtc_SetCconfig(int seample_rate, int delays);

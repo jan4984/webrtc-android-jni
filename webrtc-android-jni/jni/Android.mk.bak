@@ -91,7 +91,7 @@ LOCAL_CFLAGS += $(common_CFLAGS)
 LOCAL_LDFLAGS += $(common_LDFLAGS)
 LOCAL_C_INCLUDES += $(common_C_INCLUDES)
 
-include $(BUILD_STATIC_LIBRARY)
+include $(BUILD_SHARED_LIBRARY)
 #########################################
 #include $(CLEAR_VARS)    
 #LOCAL_MODULE := webrtc
@@ -99,16 +99,13 @@ include $(BUILD_STATIC_LIBRARY)
 #include $(PREBUILT_SHARED_LIBRARY)  
 
 include $(CLEAR_VARS)
-LOCAL_C_INCLUDES :=$(JNI_H_INCLUDE)
 LOCAL_CFLAGS += -pie -fPIE
-#LOCAL_LDFLAGS += -pie -fPIE
+LOCAL_LDFLAGS += -pie -fPIE
 #LOCAL_PATH := $(call my-dir)
 common_CFLAGS := -DWEBRTC_POSIX=1 -Ijni/src/
-#LOCAL_SHARED_LIBRARIES := libwebrtc
-LOCAL_STATIC_LIBRARIES := libwebrtc
-LOCAL_SRC_FILES := net_iwebrtc_audioprocess_sdk_AudioProcess.c webrtc_audio_test.c
-LOCAL_MODULE := audio_process
+LOCAL_SHARED_LIBRARIES := libwebrtc
+LOCAL_SRC_FILES := webrtc_audio_test.c
+LOCAL_MODULE := webrtc_test
 LOCAL_CFLAGS += $(common_CFLAGS)
-LOCAL_LDLIBS :=-llog
-include $(BUILD_SHARED_LIBRARY)
+include $(BUILD_EXECUTABLE)
 
