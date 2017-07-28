@@ -15,6 +15,8 @@ common_SRC_FILES := \
 	src/webrtc/modules/audio_processing/ns/noise_suppression_x.c          \
 	src/webrtc/modules/audio_processing/ns/ns_core.c                      \
 	src/webrtc/modules/audio_processing/ns/nsx_core.c                     \
+	src/webrtc/modules/audio_processing/agc/analog_agc.c                  \
+	src/webrtc/modules/audio_processing/agc/digital_agc.c                 \
 	src/webrtc/modules/audio_processing/utility/delay_estimator_wrapper.c \
 	src/webrtc/modules/audio_processing/utility/delay_estimator.c         \
 	src/webrtc/common_audio/fft4g.c                                       \
@@ -33,7 +35,8 @@ common_SRC_FILES := \
 	src/webrtc/common_audio/signal_processing/spl_init.c                  \
 	src/webrtc/common_audio/signal_processing/spl_sqrt.c                  \
 	src/webrtc/common_audio/signal_processing/spl_sqrt_floor.c            \
-	src/webrtc/common_audio/signal_processing/vector_scaling_operations.c
+	src/webrtc/common_audio/signal_processing/vector_scaling_operations.c \
+	webrtc/common_audio/signal_processing/dot_product_with_scale.c
 
 
 ifneq ($(findstring arm,$(TARGET_ARCH_ABI)),)

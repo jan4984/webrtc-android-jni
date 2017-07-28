@@ -17,7 +17,6 @@ obj/local/armeabi/objs/audio_process/net_iwebrtc_audioprocess_sdk_AudioProcess.o
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/linux/types.h \
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/machine/kernel.h \
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/sys/sysmacros.h \
- /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/Android/log.h \
  jni/net_iwebrtc_audioprocess_sdk_AudioProcess.h \
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/jni.h \
  jni/webrtc_audio_test.h \
@@ -66,8 +65,6 @@ obj/local/armeabi/objs/audio_process/net_iwebrtc_audioprocess_sdk_AudioProcess.o
 /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/machine/kernel.h:
 
 /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/sys/sysmacros.h:
-
-/Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/Android/log.h:
 
 jni/net_iwebrtc_audioprocess_sdk_AudioProcess.h:
 
