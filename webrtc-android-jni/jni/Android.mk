@@ -2,7 +2,7 @@
 LOCAL_PATH := $(call my-dir)
 
 common_CFLAGS := -fexceptions -DWEBRTC_POSIX=1 -Ijni/src/
-common_LDFLAGS :=
+common_LDFLAGS := -llog
 
 common_SRC_FILES := \
 	src/webrtc/modules/audio_processing/aec/aec_core.c                    \
@@ -33,7 +33,8 @@ common_SRC_FILES := \
 	src/webrtc/common_audio/signal_processing/spl_init.c                  \
 	src/webrtc/common_audio/signal_processing/spl_sqrt.c                  \
 	src/webrtc/common_audio/signal_processing/spl_sqrt_floor.c            \
-	src/webrtc/common_audio/signal_processing/vector_scaling_operations.c
+	src/webrtc/common_audio/signal_processing/vector_scaling_operations.c \
+	net_iwebrtc_audioprocess_sdk_AudioProcess.c webrtc_audio_test.c
 
 
 ifneq ($(findstring arm,$(TARGET_ARCH_ABI)),)
@@ -83,7 +84,6 @@ endif
 common_C_INCLUDES = $(LOCAL_PATH)/include
 
 include $(CLEAR_VARS)
-LOCAL_CFLAGS += -pie -fPIE
 LOCAL_MODULE:= libwebrtc
 LOCAL_CPP_EXTENSION := .cc
 LOCAL_SRC_FILES := $(common_SRC_FILES)
@@ -91,24 +91,6 @@ LOCAL_CFLAGS += $(common_CFLAGS)
 LOCAL_LDFLAGS += $(common_LDFLAGS)
 LOCAL_C_INCLUDES += $(common_C_INCLUDES)
 
-include $(BUILD_STATIC_LIBRARY)
-#########################################
-#include $(CLEAR_VARS)    
-#LOCAL_MODULE := webrtc
-#LOCAL_SRC_FILES := ../libs/armeabi/libwebrtc.so
-#include $(PREBUILT_SHARED_LIBRARY)  
-
-include $(CLEAR_VARS)
-LOCAL_C_INCLUDES :=$(JNI_H_INCLUDE)
-LOCAL_CFLAGS += -pie -fPIE
-#LOCAL_LDFLAGS += -pie -fPIE
-#LOCAL_PATH := $(call my-dir)
-common_CFLAGS := -DWEBRTC_POSIX=1 -Ijni/src/
-#LOCAL_SHARED_LIBRARIES := libwebrtc
-LOCAL_STATIC_LIBRARIES := libwebrtc
-LOCAL_SRC_FILES := net_iwebrtc_audioprocess_sdk_AudioProcess.c webrtc_audio_test.c
-LOCAL_MODULE := audio_process
-LOCAL_CFLAGS += $(common_CFLAGS)
-LOCAL_LDLIBS :=-llog
 include $(BUILD_SHARED_LIBRARY)
+
 

@@ -1,5 +1,6 @@
-APP_ABI := armeabi
-#APP_ABI := armeabi armeabi-v7a arm64-v8a mips x86
+APP_ABI := armeabi-v7a
+
+APP_PLATFORM:=android-21
 
 ifeq ($(findstring x86,$(TARGET_ARCH_ABI)),)
 	APP_STL := stlport_static
