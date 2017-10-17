@@ -31,6 +31,10 @@ static jlong create(JNIEnv *env, jobject jo){
 	}
 	#ifdef AECM
 	WebRtcAecm_Init(ret, 16000);
+	AecmConfig config;
+    config.cngMode = AecmTrue;
+	config.echoMode = 1;
+    WebRtcAecm_set_config( ret, config);
 	#else
 	WebRtcAec_Init(ret, 16000, 16000);
 	AecConfig config;
@@ -49,10 +53,13 @@ static void destory(JNIEnv *env, jobject jo, jlong h){
 	#endif
 }
 
+#ifdef AECM
+#else
 static float fpcm[160];
 static float fpcmOut[160];
 static float* pfpcm = fpcm;
 static float* pfpcmOut = fpcmOut;
+#endif
 
 static jint bufferNonSayingVoice(JNIEnv *env, jobject jo, jlong h, jobject tenMsByteBuffer){
 	unsigned char* spcm = (unsigned char*)env->GetDirectBufferAddress(tenMsByteBuffer);
