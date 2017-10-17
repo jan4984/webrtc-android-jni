@@ -34,6 +34,13 @@
 #include "webrtc/system_wrappers/interface/cpu_features_wrapper.h"
 #include "webrtc/typedefs.h"
 
+#include <Android/log.h>
+
+#ifdef TAG
+	#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, TAG, __VA_ARGS__)
+#else
+	#define LOGI(...) (void)0;
+#endif
 
 // Buffer size (samples)
 static const size_t kBufSizePartitions = 250;  // 1 second of audio in 16 kHz.
@@ -1734,6 +1741,7 @@ void WebRtcAec_ProcessFrames(AecCore* aec,
   size_t i, j;
   int out_elements = 0;
 
+  LOGI("aec this:%p, num_samples:%d,nearFrBuf:%p",aec,num_samples,aec->nearFrBuf);
   aec->frame_count++;
   // For each frame the process is as follows:
   // 1) If the system_delay indicates on being too small for processing a
@@ -1836,7 +1844,11 @@ void WebRtcAec_ProcessFrames(AecCore* aec,
       }
     }
     // Obtain an output frame.
+	LOGI("write to:%p",&out[0][j]);
     WebRtc_ReadBuffer(aec->outFrBuf, NULL, &out[0][j], FRAME_LEN);
+	//if(out[0][j]!=0.0f){
+	//	LOGI("non-zery output detected");
+	//}
     // For H bands.
     for (i = 1; i < num_bands; ++i) {
       WebRtc_ReadBuffer(aec->outFrBufH[i - 1], NULL, &out[i][j], FRAME_LEN);

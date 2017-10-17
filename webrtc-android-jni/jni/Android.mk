@@ -1,7 +1,7 @@
 
 LOCAL_PATH := $(call my-dir)
 
-common_CFLAGS := -fexceptions -DWEBRTC_POSIX=1 -Ijni/src/
+common_CFLAGS := -fexceptions -DWEBRTC_POSIX=1 -Ijni/src/ -DTAG=\"AEC_NATIVE\"
 common_LDFLAGS := -llog
 
 common_SRC_FILES := \

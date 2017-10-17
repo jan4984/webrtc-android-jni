@@ -27,6 +27,13 @@
 #include "webrtc/modules/audio_processing/aec/echo_cancellation_internal.h"
 #include "webrtc/typedefs.h"
 
+#include <Android/log.h>
+#ifdef TAG
+	#define LOGI(...) __android_log_print(ANDROID_LOG_INFO, TAG, __VA_ARGS__)
+#else
+	#define LOGI(...) (void)0;
+#endif
+
 // Measured delays [ms]
 // Device                Chrome  GTP
 // MacBook Air           10
@@ -341,6 +348,8 @@ int32_t WebRtcAec_Process(void* aecInst,
                           int32_t skew) {
   Aec* aecpc = aecInst;
   int32_t retVal = 0;
+  
+  LOGI("aec this-WebRtcAec_Process:%p",aecpc);
 
   if (out == NULL) {
     aecpc->lastError = AEC_NULL_POINTER_ERROR;
@@ -603,6 +612,8 @@ static int ProcessNormal(Aec* aecpc,
   // Limit resampling to doubling/halving of signal
   const float minSkewEst = -0.5f;
   const float maxSkewEst = 1.0f;
+  
+  LOGI("aec this-ProcessNormal:%p",aecpc);
 
   msInSndCardBuf =
       msInSndCardBuf > kMaxTrustedDelayMs ? kMaxTrustedDelayMs : msInSndCardBuf;
@@ -646,6 +657,7 @@ static int ProcessNormal(Aec* aecpc,
     for (i = 0; i < num_bands; ++i) {
       // Only needed if they don't already point to the same place.
       if (nearend[i] != out[i]) {
+		LOGI("copy to:%p with length %d",out[i],sizeof(nearend[i][0]) * nrOfSamples);
         memcpy(out[i], nearend[i], sizeof(nearend[i][0]) * nrOfSamples);
       }
     }
