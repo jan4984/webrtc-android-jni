@@ -1,5 +1,5 @@
-obj/local/armeabi/objs/audio_process/net_iwebrtc_audioprocess_sdk_AudioProcess.o: \
- jni/net_iwebrtc_audioprocess_sdk_AudioProcess.c \
+obj/local/armeabi/objs/audio_process/webrtc_audio_test.o: \
+ jni/webrtc_audio_test.c jni/webrtc_audio_test.h \
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/stdio.h \
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/sys/cdefs.h \
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/sys/cdefs_elf.h \
@@ -17,10 +17,6 @@ obj/local/armeabi/objs/audio_process/net_iwebrtc_audioprocess_sdk_AudioProcess.o
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/linux/types.h \
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/machine/kernel.h \
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/sys/sysmacros.h \
- /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/Android/log.h \
- jni/net_iwebrtc_audioprocess_sdk_AudioProcess.h \
- /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/jni.h \
- jni/webrtc_audio_test.h \
  jni/src/webrtc/modules/audio_processing/ns/nsx_core.h \
  jni/src/webrtc/common_audio/signal_processing/include/signal_processing_library.h \
  /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/string.h \
@@ -31,7 +27,11 @@ obj/local/armeabi/objs/audio_process/net_iwebrtc_audioprocess_sdk_AudioProcess.o
  jni/src/webrtc/modules/audio_processing/aec/include/echo_cancellation.h \
  jni/src/webrtc/modules/audio_processing/ns/include/noise_suppression_x.h \
  jni/src/webrtc/common_audio/signal_processing/include/real_fft.h \
- jni/src/webrtc/modules/audio_processing/ns/include/noise_suppression.h
+ jni/src/webrtc/modules/audio_processing/ns/include/noise_suppression.h \
+ /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/jni.h \
+ /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/Android/log.h
+
+jni/webrtc_audio_test.h:
 
 /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/stdio.h:
 
@@ -67,14 +67,6 @@ obj/local/armeabi/objs/audio_process/net_iwebrtc_audioprocess_sdk_AudioProcess.o
 
 /Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/sys/sysmacros.h:
 
-/Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/Android/log.h:
-
-jni/net_iwebrtc_audioprocess_sdk_AudioProcess.h:
-
-/Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/jni.h:
-
-jni/webrtc_audio_test.h:
-
 jni/src/webrtc/modules/audio_processing/ns/nsx_core.h:
 
 jni/src/webrtc/common_audio/signal_processing/include/signal_processing_library.h:
@@ -96,3 +88,7 @@ jni/src/webrtc/modules/audio_processing/ns/include/noise_suppression_x.h:
 jni/src/webrtc/common_audio/signal_processing/include/real_fft.h:
 
 jni/src/webrtc/modules/audio_processing/ns/include/noise_suppression.h:
+
+/Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/jni.h:
+
+/Users/apple/Library/Android/android-ndk-r10e/platforms/android-3/arch-arm/usr/include/Android/log.h:
