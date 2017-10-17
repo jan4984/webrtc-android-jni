@@ -34,7 +34,9 @@ common_SRC_FILES := \
 	src/webrtc/common_audio/signal_processing/spl_sqrt.c                  \
 	src/webrtc/common_audio/signal_processing/spl_sqrt_floor.c            \
 	src/webrtc/common_audio/signal_processing/vector_scaling_operations.c \
-	net_iwebrtc_audioprocess_sdk_AudioProcess.c webrtc_audio_test.c
+	aec.cpp
+
+	#net_iwebrtc_audioprocess_sdk_AudioProcess.c webrtc_audio_test.c
 
 
 ifneq ($(findstring arm,$(TARGET_ARCH_ABI)),)
@@ -85,7 +87,7 @@ common_C_INCLUDES = $(LOCAL_PATH)/include
 
 include $(CLEAR_VARS)
 LOCAL_MODULE:= libwebrtc
-LOCAL_CPP_EXTENSION := .cc
+LOCAL_CPP_EXTENSION := .cc .cpp
 LOCAL_SRC_FILES := $(common_SRC_FILES)
 LOCAL_CFLAGS += $(common_CFLAGS)
 LOCAL_LDFLAGS += $(common_LDFLAGS)
